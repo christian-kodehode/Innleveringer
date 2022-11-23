@@ -11,15 +11,10 @@ const enterKey = (event) => {
 // (F.eks. "257" blir til "TO HUNDRE OG FEMTISYV")
 
 const numToText = (input = document.getElementById("num-in").value) => {
-  const inputArray = input.split("");
   let out = "";
-  const h = "HUNDRE";
-  const t = "TUSEN";
-  const m = "EN MILLION";
   const err = "INPUT MÅ VÆRE ET HELTALL MELLOM 0 og 999.";
-  const og = "";
-  const ogg = "";
-  const outArray = [];
+  const nullFirst = "FØRSTE SIFFER KAN IKKE VÆRE 0.";
+  const h = "HUNDRE";
   const uEnere = ["NULL", "EN", "TO", "TRE", "FIRE", "FEM", "SEKS", "SYV", "ÅTTE", "NI"];
   const bEnere = ["NULL", "ETT", "TO", "TRE", "FIRE", "FEM", "SEKS", "SYV", "ÅTTE", "NI"];
   const teens = [
@@ -55,7 +50,9 @@ const numToText = (input = document.getElementById("num-in").value) => {
       out = uEnere[Number(input)];
       break;
     case 2:
-      if (input[1] == 0) {
+      if (input[0] == 0) {
+        out = nullFirst;
+      } else if (input[1] == 0) {
         out = tiere[Number(input[0])];
       } else if (input[0] == 1) {
         out = `${teens[Number(input[1])]}`;
@@ -64,7 +61,9 @@ const numToText = (input = document.getElementById("num-in").value) => {
       }
       break;
     case 3:
-      if (input[1] == 0 && input[2] == 0) {
+      if (input[0] == 0) {
+        out = nullFirst;
+      } else if (input[1] == 0 && input[2] == 0) {
         out = `${bEnere[Number(input[0])]} ${h}`;
       } else if (input[1] == 0 && input[2] != 0) {
         out = `${bEnere[Number(input[0])]} ${h} OG ${uEnere[Number(input[2])]}`;
@@ -87,7 +86,7 @@ const numToText = (input = document.getElementById("num-in").value) => {
   }
 
   if (input[0] == "0") {
-    out = err;
+    out = nullFirst;
   }
 
   document.getElementById("ans").innerText = `${out}`;
