@@ -8,7 +8,7 @@ const enterKey = (event) => {
 */
 
 // GJØRE OM ET TALL TIL TEKST
-// (Format: "123456789" blir til "ETT HUNDRE OG TJUE TRE MILLIONER FIRE HUNDRE OG FEMTI SEKS TUSEN TRE HUNDRE OG TJUE EN")
+// (Format: "123456789" blir til "ETT HUNDRE OG TJUE TRE MILLIONER FIRE HUNDRE OG FEMTI SEKS TUSEN SYV HUNDRE OG ÅTTI NI")
 
 const numToText = (input = document.getElementById("num-in").value) => {
   let out = "";
