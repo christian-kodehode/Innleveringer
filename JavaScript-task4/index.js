@@ -12,11 +12,18 @@ const enterKey = (event) => {
 
 const numToText = (input = document.getElementById("num-in").value) => {
   let out = "";
-  const err = "INPUT MÅ VÆRE ET HELTALL MELLOM 0 og 999.";
+  let outEn = "";
+  let outTo = "";
+  let outTre = "";
+  const err = "INPUT MÅ VÆRE ET HELTALL MELLOM 0 og 1 000 000 000.";
   const nullFirst = "FØRSTE SIFFER KAN IKKE VÆRE 0.";
   const h = "HUNDRE";
-  const uEnere = ["NULL", "EN", "TO", "TRE", "FIRE", "FEM", "SEKS", "SYV", "ÅTTE", "NI"];
-  const bEnere = ["NULL", "ETT", "TO", "TRE", "FIRE", "FEM", "SEKS", "SYV", "ÅTTE", "NI"];
+  const t = "TUSEN";
+  const mFlere = "MILLIONER";
+  const mEn = "MILLION";
+  let m = "";
+  const uEnere = ["", "EN", "TO", "TRE", "FIRE", "FEM", "SEKS", "SYV", "ÅTTE", "NI"];
+  const bEnere = ["", "ETT", "TO", "TRE", "FIRE", "FEM", "SEKS", "SYV", "ÅTTE", "NI"];
   const teens = [
     "TI",
     "ELLEVE",
@@ -41,18 +48,30 @@ const numToText = (input = document.getElementById("num-in").value) => {
     "ÅTTI",
     "NITTI",
   ];
+  const ener = input.charAt(Number(input.length - 1));
+  const tier = input.charAt(Number(input.length - 2));
+  const hundrer = input.charAt(Number(input.length - 3));
+  const tusener = input.charAt(Number(input.length - 4));
+  const tiTusener = input.charAt(Number(input.length - 5));
+  const hundreTusener = input.charAt(Number(input.length - 6));
+  const millioner = input.charAt(Number(input.length - 7));
+  const tiMillioner = input.charAt(Number(input.length - 8));
+  const hundreMillioner = input.charAt(Number(input.length - 9));
+  let inputLast = [];
+  let inputMiddle = [];
+  let inputFirst = [];
 
   switch (input.length) {
     case 0:
       out = err;
       break;
+
     case 1:
       out = uEnere[Number(input)];
       break;
+
     case 2:
-      if (input[0] == 0) {
-        out = nullFirst;
-      } else if (input[1] == 0) {
+      if (input[1] == 0) {
         out = tiere[Number(input[0])];
       } else if (input[0] == 1) {
         out = `${teens[Number(input[1])]}`;
@@ -60,10 +79,9 @@ const numToText = (input = document.getElementById("num-in").value) => {
         out = `${tiere[Number(input[0])]} ${uEnere[Number(input[1])]}`;
       }
       break;
+
     case 3:
-      if (input[0] == 0) {
-        out = nullFirst;
-      } else if (input[1] == 0 && input[2] == 0) {
+      if (input[1] == 0 && input[2] == 0) {
         out = `${bEnere[Number(input[0])]} ${h}`;
       } else if (input[1] == 0 && input[2] != 0) {
         out = `${bEnere[Number(input[0])]} ${h} OG ${uEnere[Number(input[2])]}`;
@@ -77,6 +95,313 @@ const numToText = (input = document.getElementById("num-in").value) => {
         }`;
       }
       break;
+
+    case 4:
+      inputLast = [hundrer, tier, ener];
+      inputFirst = [tusener];
+      if (inputLast[0] == 0 && inputLast[1] == 0 && inputLast[2] != 0) {
+        outTo = `OG ${uEnere[inputLast[2]]}`;
+      } else if (inputLast[0] == 0 && inputLast[1] == 1) {
+        outTo = `OG ${teens[inputLast[2]]}`;
+      } else if (inputLast[0] == 0 && inputLast[1] > 1 && inputLast[2] == 0) {
+        outTo = `OG ${tiere[inputLast[1]]}`;
+      } else if (inputLast[0] == 0 && inputLast[1] > 1 && inputLast[2] != 0) {
+        outTo = `OG ${tiere[inputLast[1]]} ${uEnere[inputLast[2]]}`;
+      } else if (inputLast[1] == 0 && inputLast[2] == 0) {
+        outTo = `${bEnere[Number(inputLast[0])]} ${h}`;
+      } else if (inputLast[1] == 0 && inputLast[2] != 0) {
+        outTo = `${bEnere[Number(inputLast[0])]} ${h} OG ${uEnere[Number(inputLast[2])]}`;
+      } else if (inputLast[1] == 1) {
+        outTo = `${bEnere[Number(inputLast[0])]} ${h} OG ${teens[Number(inputLast[2])]}`;
+      } else if (inputLast[1] > 1 && inputLast[2] == 0) {
+        outTo = `${bEnere[Number(inputLast[0])]} ${h} OG ${tiere[Number(inputLast[1])]}`;
+      } else if (inputLast[1] > 1 && inputLast[2] != 0) {
+        outTo = `${bEnere[Number(inputLast[0])]} ${h} OG ${tiere[Number(inputLast[1])]} ${
+          uEnere[Number(inputLast[2])]
+        }`;
+      }
+      outEn = `${bEnere[Number(inputFirst[0])]} ${t}`;
+      out = `${outEn} ${outTo}`;
+      break;
+
+    case 5:
+      inputLast = [hundrer, tier, ener];
+      inputFirst = [tiTusener, tusener];
+      if (inputLast[0] == 0 && inputLast[1] == 0 && inputLast[2] != 0) {
+        outTo = `OG ${uEnere[inputLast[2]]}`;
+      } else if (inputLast[0] == 0 && inputLast[1] == 1) {
+        outTo = `OG ${teens[inputLast[2]]}`;
+      } else if (inputLast[0] == 0 && inputLast[1] > 1 && inputLast[2] == 0) {
+        outTo = `OG ${tiere[inputLast[1]]}`;
+      } else if (inputLast[0] == 0 && inputLast[1] > 1 && inputLast[2] != 0) {
+        outTo = `OG ${tiere[inputLast[1]]} ${uEnere[inputLast[2]]}`;
+      } else if (inputLast[1] == 0 && inputLast[2] == 0) {
+        outTo = `${bEnere[Number(inputLast[0])]} ${h}`;
+      } else if (inputLast[1] == 0 && inputLast[2] != 0) {
+        outTo = `${bEnere[Number(inputLast[0])]} ${h} OG ${uEnere[Number(inputLast[2])]}`;
+      } else if (inputLast[1] == 1) {
+        outTo = `${bEnere[Number(inputLast[0])]} ${h} OG ${teens[Number(inputLast[2])]}`;
+      } else if (inputLast[1] > 1 && inputLast[2] == 0) {
+        outTo = `${bEnere[Number(inputLast[0])]} ${h} OG ${tiere[Number(inputLast[1])]}`;
+      } else if (inputLast[1] > 1 && inputLast[2] != 0) {
+        outTo = `${bEnere[Number(inputLast[0])]} ${h} OG ${tiere[Number(inputLast[1])]} ${
+          uEnere[Number(inputLast[2])]
+        }`;
+      }
+      if (inputFirst[1] == 0) {
+        outEn = tiere[Number(inputFirst[0])];
+      } else if (inputFirst[0] == 1) {
+        outEn = `${teens[Number(inputFirst[1])]}`;
+      } else {
+        outEn = `${tiere[Number(inputFirst[0])]} ${uEnere[Number(inputFirst[1])]}`;
+      }
+      out = `${outEn} ${t} ${outTo}`;
+      break;
+
+    case 6:
+      inputLast = [hundrer, tier, ener];
+      inputFirst = [hundreTusener, tiTusener, tusener];
+      if (inputFirst[1] == 0 && inputFirst[2] == 0) {
+        outEn = `${bEnere[Number(inputFirst[0])]} ${h}`;
+      } else if (inputFirst[1] == 0 && inputFirst[2] != 0) {
+        outEn = `${bEnere[Number(inputFirst[0])]} ${h} OG ${uEnere[Number(inputFirst[2])]}`;
+      } else if (inputFirst[1] == 1) {
+        outEn = `${bEnere[Number(inputFirst[0])]} ${h} OG ${teens[Number(inputFirst[2])]}`;
+      } else if (inputFirst[1] > 1 && inputFirst[2] == 0) {
+        outEn = `${bEnere[Number(inputFirst[0])]} ${h} OG ${tiere[Number(inputFirst[1])]}`;
+      } else if (inputFirst[1] > 1 && inputFirst[2] != 0) {
+        outEn = `${bEnere[Number(inputFirst[0])]} ${h} OG ${tiere[Number(inputFirst[1])]} ${
+          uEnere[Number(inputFirst[2])]
+        }`;
+      }
+      if (inputLast[0] == 0 && inputLast[1] == 0 && inputLast[2] != 0) {
+        outTo = `OG ${uEnere[inputLast[2]]}`;
+      } else if (inputLast[0] == 0 && inputLast[1] == 1) {
+        outTo = `OG ${teens[inputLast[2]]}`;
+      } else if (inputLast[0] == 0 && inputLast[1] > 1 && inputLast[2] == 0) {
+        outTo = `OG ${tiere[inputLast[1]]}`;
+      } else if (inputLast[0] == 0 && inputLast[1] > 1 && inputLast[2] != 0) {
+        outTo = `OG ${tiere[inputLast[1]]} ${uEnere[inputLast[2]]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] == 0 && inputLast[2] == 0) {
+        outTo = `${bEnere[Number(inputLast[0])]} ${h}`;
+      } else if (inputLast[0] > 0 && inputLast[1] == 0 && inputLast[2] != 0) {
+        outTo = `${bEnere[Number(inputLast[0])]} ${h} OG ${uEnere[Number(inputLast[2])]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] == 1) {
+        outTo = `${bEnere[Number(inputLast[0])]} ${h} OG ${teens[Number(inputLast[2])]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] > 1 && inputLast[2] == 0) {
+        outTo = `${bEnere[Number(inputLast[0])]} ${h} OG ${tiere[Number(inputLast[1])]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] > 1 && inputLast[2] != 0) {
+        outTo = `${bEnere[Number(inputLast[0])]} ${h} OG ${tiere[Number(inputLast[1])]} ${
+          uEnere[Number(inputLast[2])]
+        }`;
+      }
+      out = `${outEn} ${t} ${outTo}`;
+      break;
+
+    case 7:
+      inputLast = [hundrer, tier, ener];
+      inputMiddle = [hundreTusener, tiTusener, tusener];
+      inputFirst = [millioner];
+
+      if (inputLast[0] == 0 && inputLast[1] == 0 && inputLast[2] != 0) {
+        outTre = `OG ${uEnere[inputLast[2]]}`;
+      } else if (inputLast[0] == 0 && inputLast[1] == 1) {
+        outTre = `OG ${teens[inputLast[2]]}`;
+      } else if (inputLast[0] == 0 && inputLast[1] > 1 && inputLast[2] == 0) {
+        outTre = `OG ${tiere[inputLast[1]]} ${uEnere[inputLast[2]]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] == 0 && inputLast[2] == 0) {
+        outTre = `${bEnere[Number(inputLast[0])]} ${h}`;
+      } else if (inputLast[0] > 0 && inputLast[1] == 0 && inputLast[2] != 0) {
+        outTre = `${bEnere[Number(inputLast[0])]} ${h} OG ${uEnere[Number(inputLast[2])]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] == 1) {
+        outTre = `${bEnere[Number(inputLast[0])]} ${h} OG ${teens[Number(inputLast[2])]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] > 1 && inputLast[2] == 0) {
+        outTre = `${bEnere[Number(inputLast[0])]} ${h} OG ${tiere[Number(inputLast[1])]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] > 1 && inputLast[2] != 0) {
+        outTre = `${bEnere[Number(inputLast[0])]} ${h} OG ${tiere[Number(inputLast[1])]} ${
+          uEnere[Number(inputLast[2])]
+        }`;
+      }
+
+      if (inputMiddle[0] == 0 && inputMiddle[1] == 0 && inputMiddle[2] != 0) {
+        outTo = `${bEnere[inputMiddle[2]]}`;
+      } else if (inputMiddle[0] == 0 && inputMiddle[1] == 1) {
+        outTo = `${teens[inputMiddle[2]]}`;
+      } else if (inputMiddle[0] == 0 && inputMiddle[1] > 1 && inputMiddle[2] == 0) {
+        outTo = `${tiere[inputMiddle[1]]}`;
+      } else if (inputMiddle[0] == 0 && inputMiddle[1] > 1 && inputMiddle[2] != 0) {
+        outTo = `${tiere[inputMiddle[1]]} ${uEnere[inputMiddle[2]]}`;
+      } else if (inputLast[0] > 0 && inputMiddle[1] == 0 && inputMiddle[2] == 0) {
+        outTo = `${bEnere[Number(inputMiddle[0])]} ${h}`;
+      } else if (inputMiddle[0] > 0 && inputMiddle[1] == 0 && inputMiddle[2] != 0) {
+        outTo = `${bEnere[Number(inputMiddle[0])]} ${h} OG ${uEnere[Number(inputMiddle[2])]}`;
+      } else if (inputMiddle[0] > 0 && inputMiddle[1] == 1) {
+        outTo = `${bEnere[Number(inputMiddle[0])]} ${h} OG ${teens[Number(inputMiddle[2])]}`;
+      } else if (inputMiddle[0] > 0 && inputMiddle[1] > 1 && inputMiddle[2] == 0) {
+        outTo = `${bEnere[Number(inputMiddle[0])]} ${h} OG ${tiere[Number(inputMiddle[1])]}`;
+      } else if (inputMiddle[0] > 0 && inputMiddle[1] > 1 && inputMiddle[2] != 0) {
+        outTo = `${bEnere[Number(inputMiddle[0])]} ${h} OG ${tiere[Number(inputMiddle[1])]} ${
+          uEnere[Number(inputMiddle[2])]
+        }`;
+      }
+
+      outEn = uEnere[Number(inputFirst[0])];
+
+      if (Number(millioner) == 1) {
+        m = mEn;
+      } else if (Number(millioner) > 1) {
+        m = mFlere;
+      } else {
+        m = "";
+      }
+      if (inputMiddle[0] == 0 && inputMiddle[1] == 0 && inputMiddle[2] == 0) {
+        out = `${outEn} ${m} ${outTre}`;
+      } else {
+        out = `${outEn} ${m} ${outTo} ${t} ${outTre}`;
+      }
+      break;
+
+    case 8:
+      inputLast = [hundrer, tier, ener];
+      inputMiddle = [hundreTusener, tiTusener, tusener];
+      inputFirst = [tiMillioner, millioner];
+      m = mFlere;
+
+      if (inputLast[0] == 0 && inputLast[1] == 0 && inputLast[2] != 0) {
+        outTre = `OG ${uEnere[inputLast[2]]}`;
+      } else if (inputLast[0] == 0 && inputLast[1] == 1) {
+        outTre = `OG ${teens[inputLast[2]]}`;
+      } else if (inputLast[0] == 0 && inputLast[1] > 1 && inputLast[2] == 0) {
+        outTre = `OG ${tiere[inputLast[1]]} ${uEnere[inputLast[2]]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] == 0 && inputLast[2] == 0) {
+        outTre = `${bEnere[Number(inputLast[0])]} ${h}`;
+      } else if (inputLast[0] > 0 && inputLast[1] == 0 && inputLast[2] != 0) {
+        outTre = `${bEnere[Number(inputLast[0])]} ${h} OG ${uEnere[Number(inputLast[2])]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] == 1) {
+        outTre = `${bEnere[Number(inputLast[0])]} ${h} OG ${teens[Number(inputLast[2])]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] > 1 && inputLast[2] == 0) {
+        outTre = `${bEnere[Number(inputLast[0])]} ${h} OG ${tiere[Number(inputLast[1])]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] > 1 && inputLast[2] != 0) {
+        outTre = `${bEnere[Number(inputLast[0])]} ${h} OG ${tiere[Number(inputLast[1])]} ${
+          uEnere[Number(inputLast[2])]
+        }`;
+      }
+
+      if (inputMiddle[0] == 0 && inputMiddle[1] == 0 && inputMiddle[2] != 0) {
+        outTo = `${bEnere[inputMiddle[2]]}`;
+      } else if (inputMiddle[0] == 0 && inputMiddle[1] == 1) {
+        outTo = `${teens[inputMiddle[2]]}`;
+      } else if (inputMiddle[0] == 0 && inputMiddle[1] > 1 && inputMiddle[2] == 0) {
+        outTo = `${tiere[inputMiddle[1]]}`;
+      } else if (inputMiddle[0] == 0 && inputMiddle[1] > 1 && inputMiddle[2] != 0) {
+        outTo = `${tiere[inputMiddle[1]]} ${uEnere[inputMiddle[2]]}`;
+      } else if (inputLast[0] > 0 && inputMiddle[1] == 0 && inputMiddle[2] == 0) {
+        outTo = `${bEnere[Number(inputMiddle[0])]} ${h}`;
+      } else if (inputMiddle[0] > 0 && inputMiddle[1] == 0 && inputMiddle[2] != 0) {
+        outTo = `${bEnere[Number(inputMiddle[0])]} ${h} OG ${uEnere[Number(inputMiddle[2])]}`;
+      } else if (inputMiddle[0] > 0 && inputMiddle[1] == 1) {
+        outTo = `${bEnere[Number(inputMiddle[0])]} ${h} OG ${teens[Number(inputMiddle[2])]}`;
+      } else if (inputMiddle[0] > 0 && inputMiddle[1] > 1 && inputMiddle[2] == 0) {
+        outTo = `${bEnere[Number(inputMiddle[0])]} ${h} OG ${tiere[Number(inputMiddle[1])]}`;
+      } else if (inputMiddle[0] > 0 && inputMiddle[1] > 1 && inputMiddle[2] != 0) {
+        outTo = `${bEnere[Number(inputMiddle[0])]} ${h} OG ${tiere[Number(inputMiddle[1])]} ${
+          uEnere[Number(inputMiddle[2])]
+        }`;
+      }
+
+      if (inputFirst[1] == 0) {
+        outEn = tiere[Number(inputFirst[0])];
+      } else if (input[0] == 1) {
+        outEn = `${teens[Number(inputFirst[1])]}`;
+      } else {
+        outEn = `${tiere[Number(inputFirst[0])]} ${uEnere[Number(inputFirst[1])]}`;
+      }
+
+      if (inputMiddle[0] == 0 && inputMiddle[1] == 0 && inputMiddle[2] == 0) {
+        out = `${outEn} ${m} ${outTre}`;
+      } else {
+        out = `${outEn} ${m} ${outTo} ${t} ${outTre}`;
+      }
+
+      break;
+
+    case 9:
+      inputLast = [hundrer, tier, ener];
+      inputMiddle = [hundreTusener, tiTusener, tusener];
+      inputFirst = [hundreMillioner, tiMillioner, millioner];
+      m = mFlere;
+
+      if (inputLast[0] == 0 && inputLast[1] == 0 && inputLast[2] != 0) {
+        outTre = `OG ${uEnere[inputLast[2]]}`;
+      } else if (inputLast[0] == 0 && inputLast[1] == 1) {
+        outTre = `OG ${teens[inputLast[2]]}`;
+      } else if (inputLast[0] == 0 && inputLast[1] > 1 && inputLast[2] == 0) {
+        outTre = `OG ${tiere[inputLast[1]]} ${uEnere[inputLast[2]]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] == 0 && inputLast[2] == 0) {
+        outTre = `${bEnere[Number(inputLast[0])]} ${h}`;
+      } else if (inputLast[0] > 0 && inputLast[1] == 0 && inputLast[2] != 0) {
+        outTre = `${bEnere[Number(inputLast[0])]} ${h} OG ${uEnere[Number(inputLast[2])]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] == 1) {
+        outTre = `${bEnere[Number(inputLast[0])]} ${h} OG ${teens[Number(inputLast[2])]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] > 1 && inputLast[2] == 0) {
+        outTre = `${bEnere[Number(inputLast[0])]} ${h} OG ${tiere[Number(inputLast[1])]}`;
+      } else if (inputLast[0] > 0 && inputLast[1] > 1 && inputLast[2] != 0) {
+        outTre = `${bEnere[Number(inputLast[0])]} ${h} OG ${tiere[Number(inputLast[1])]} ${
+          uEnere[Number(inputLast[2])]
+        }`;
+      }
+
+      if (inputMiddle[0] == 0 && inputMiddle[1] == 0 && inputMiddle[2] != 0) {
+        outTo = `${bEnere[inputMiddle[2]]}`;
+      } else if (inputMiddle[0] == 0 && inputMiddle[1] == 1) {
+        outTo = `${teens[inputMiddle[2]]}`;
+      } else if (inputMiddle[0] == 0 && inputMiddle[1] > 1 && inputMiddle[2] == 0) {
+        outTo = `${tiere[inputMiddle[1]]}`;
+      } else if (inputMiddle[0] == 0 && inputMiddle[1] > 1 && inputMiddle[2] != 0) {
+        outTo = `${tiere[inputMiddle[1]]} ${uEnere[inputMiddle[2]]}`;
+      } else if (inputLast[0] > 0 && inputMiddle[1] == 0 && inputMiddle[2] == 0) {
+        outTo = `${bEnere[Number(inputMiddle[0])]} ${h}`;
+      } else if (inputMiddle[0] > 0 && inputMiddle[1] == 0 && inputMiddle[2] != 0) {
+        outTo = `${bEnere[Number(inputMiddle[0])]} ${h} OG ${uEnere[Number(inputMiddle[2])]}`;
+      } else if (inputMiddle[0] > 0 && inputMiddle[1] == 1) {
+        outTo = `${bEnere[Number(inputMiddle[0])]} ${h} OG ${teens[Number(inputMiddle[2])]}`;
+      } else if (inputMiddle[0] > 0 && inputMiddle[1] > 1 && inputMiddle[2] == 0) {
+        outTo = `${bEnere[Number(inputMiddle[0])]} ${h} OG ${tiere[Number(inputMiddle[1])]}`;
+      } else if (inputMiddle[0] > 0 && inputMiddle[1] > 1 && inputMiddle[2] != 0) {
+        outTo = `${bEnere[Number(inputMiddle[0])]} ${h} OG ${tiere[Number(inputMiddle[1])]} ${
+          uEnere[Number(inputMiddle[2])]
+        }`;
+      }
+
+      if (inputFirst[1] == 0 && inputFirst[2] == 0) {
+        outEn = `${bEnere[Number(inputFirst[0])]} ${h}`;
+      } else if (inputFirst[1] == 0 && inputFirst[2] != 0) {
+        outEn = `${bEnere[Number(inputFirst[0])]} ${h} OG ${uEnere[Number(inputFirst[2])]}`;
+      } else if (inputFirst[1] == 1) {
+        outEn = `${bEnere[Number(inputFirst[0])]} ${h} OG ${teens[Number(inputFirst[2])]}`;
+      } else if (inputFirst[1] > 1 && inputFirst[2] == 0) {
+        outEn = `${bEnere[Number(inputFirst[0])]} ${h} OG ${tiere[Number(inputFirst[1])]}`;
+      } else if (inputFirst[1] > 1 && inputFirst[2] != 0) {
+        outEn = `${bEnere[Number(inputFirst[0])]} ${h} OG ${tiere[Number(inputFirst[1])]} ${
+          uEnere[Number(inputFirst[2])]
+        }`;
+      }
+
+      if (inputMiddle[0] == 0 && inputMiddle[1] == 0 && inputMiddle[2] == 0) {
+        out = `${outEn} ${m} ${outTre}`;
+      } else {
+        out = `${outEn} ${m} ${outTo} ${t} ${outTre}`;
+      }
+      break;
+
+    case 10:
+      if (Number(input) == 1000000000) {
+        out = "EN MILLIARD";
+      } else {
+        out = err;
+      }
+      break;
+
     default:
       out = err;
   }
@@ -84,18 +409,16 @@ const numToText = (input = document.getElementById("num-in").value) => {
   if (Number(input) < 0) {
     out = err;
   }
-
   if (input[0] == "0") {
     out = nullFirst;
   }
-
   document.getElementById("ans").innerText = `${out}`;
 };
 
 // LAGE SIRKLER MED TALL INNI (DIV'ER) FOR ALLE PRIMTALL MELLOM 2 OG ET GITT INPUT-TALL
 
 // const drawPrimes = (input = document.getElementById("num-two").value) => {
-//   //
+//
 //   let primeArray = [2, 3];
 //   let isPrime = true;
 
