@@ -15,9 +15,16 @@ img {
   border: 2px solid cyan;
 }
 
-hr {
+#top-hr {
   background-color: black;
   width: 100%;
   heigth: 5px;
   margin: 20px 0 10px 0;
+}
+
+.task-hr {
+  background-color: black;
+  width: 100%;
+  heigth: 3px;
+  margin: 7px 0;
 }
