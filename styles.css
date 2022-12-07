@@ -13,3 +13,10 @@ body {
 img {
   border: 3px solid red;
 }
+
+hr {
+  background-color: black;
+  width: 100%;
+  heigth: 3px;
+  margin: 5px 0;
+}
