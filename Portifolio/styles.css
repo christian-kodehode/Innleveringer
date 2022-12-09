@@ -4,7 +4,7 @@
 
 body {
   margin: 0 auto;
-  width: 40vw;
+  width: 100vw;
   border-left: 1px solid black;
   border-right: 1px solid black;
   font-family: "Trebuchet MS", sans-serif;
@@ -98,7 +98,7 @@ h1 {
   width: 100%;
   height: 160px;
   background-image: url("./pics/prosjekter/julekalender.jpg");
-  background-size: 40vw;
+  background-size: 100vw;
   background-repeat: no-repeat;
   background-position-y: center;
   position: absolute;
