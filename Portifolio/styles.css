@@ -4,7 +4,7 @@
 
 body {
   margin: 0 auto;
-  width: 100vw;
+  width: 40vw;
   border-left: 1px solid black;
   border-right: 1px solid black;
   font-family: "Trebuchet MS", sans-serif;
@@ -69,6 +69,7 @@ h1 {
 .p-about {
   font-size: 0.875rem;
   color: #0f2246;
+  line-height: 1.15rem;
 }
 
 .portfolioContainer {
@@ -78,11 +79,26 @@ h1 {
   width: 100%;
 }
 
+.h1-prosjekterContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #6d9bf5;
+  padding: 0 0 25x 0;
+}
+
+.h1-prosjekter {
+  font-size: 1.75rem;
+  color: white;
+  text-shadow: 0 0 5px #0f2246;
+  padding: 15px 0;
+}
+
 .projectF {
   width: 100%;
   height: 160px;
   background-image: url("./pics/prosjekter/julekalender.jpg");
-  background-size: 100vw;
+  background-size: 40vw;
   background-repeat: no-repeat;
   background-position-y: center;
   position: absolute;
@@ -93,7 +109,7 @@ h1 {
   width: 50%;
   height: 160px;
   background-image: url("./pics/prosjekter/julekalender.jpg");
-  background-size: 100vw;
+  background-size: 50vw;
   background-repeat: no-repeat;
   background-position-y: center;
   position: absolute;
@@ -104,7 +120,7 @@ h1 {
   width: 50%;
   height: 160px;
   background-image: url("./pics/prosjekter/julekalender.jpg");
-  background-size: 100vw;
+  background-size: 50vw;
   background-repeat: no-repeat;
   background-position-y: center;
   position: absolute;
@@ -115,7 +131,7 @@ h1 {
   width: 50%;
   height: 160px;
   background-image: url("./pics/prosjekter/julekalender.jpg");
-  background-size: 100vw;
+  background-size: 50vw;
   background-repeat: no-repeat;
   background-position-y: center;
   position: absolute;
@@ -126,7 +142,7 @@ h1 {
   width: 50%;
   height: 160px;
   background-image: url("./pics/prosjekter/julekalender.jpg");
-  background-size: 100vw;
+  background-size: 50vw;
   background-repeat: no-repeat;
   background-position-y: center;
   position: absolute;
@@ -201,6 +217,7 @@ h1 {
 .h2-contact {
   font-size: 1.75rem;
   text-shadow: 0 0 3px #0f2246;
+  margin: 0 0 20px 0;
 }
 
 .contactForm {
