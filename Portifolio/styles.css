@@ -5,6 +5,7 @@
 body {
   margin: 0 auto;
   width: 100vw;
+  max-width: 500px;
   border-left: 1px solid black;
   border-right: 1px solid black;
   font-family: "Trebuchet MS", sans-serif;
@@ -99,50 +100,7 @@ h1 {
   height: 160px;
   background-image: url("./pics/prosjekter/julekalender.jpg");
   background-size: 100vw;
-  background-repeat: no-repeat;
-  background-position-y: center;
-  position: absolute;
-  opacity: 0.25;
-}
-
-.project2 {
-  width: 50%;
-  height: 160px;
-  background-image: url("./pics/prosjekter/julekalender.jpg");
-  background-size: 50vw;
-  background-repeat: no-repeat;
-  background-position-y: center;
-  position: absolute;
-  opacity: 0.25;
-}
-
-.project3 {
-  width: 50%;
-  height: 160px;
-  background-image: url("./pics/prosjekter/julekalender.jpg");
-  background-size: 50vw;
-  background-repeat: no-repeat;
-  background-position-y: center;
-  position: absolute;
-  opacity: 0.25;
-}
-
-.project4 {
-  width: 50%;
-  height: 160px;
-  background-image: url("./pics/prosjekter/julekalender.jpg");
-  background-size: 50vw;
-  background-repeat: no-repeat;
-  background-position-y: center;
-  position: absolute;
-  opacity: 0.25;
-}
-
-.project5 {
-  width: 50%;
-  height: 160px;
-  background-image: url("./pics/prosjekter/julekalender.jpg");
-  background-size: 50vw;
+  max-width: 500px;
   background-repeat: no-repeat;
   background-position-y: center;
   position: absolute;
