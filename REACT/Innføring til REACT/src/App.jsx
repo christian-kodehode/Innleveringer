@@ -1,8 +1,22 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 
 // CSS
 import "./App.css";
+
+// COMPONENTS
+import NewComponent from "./components/NewComponent";
+import Velkommen from "./components/Velkommen";
+import Card from "./components/Card";
+
+// DATA
+import { cardInfo } from "./data/data";
+
+let counter = 0;
+
+function handleClick(event) {
+  counter++;
+  console.log(`Takk! #${counter}`);
+}
 
 /**
  * Main component
@@ -12,6 +26,8 @@ function App() {
 
   return (
     <div className="App">
+      <button onClick={(event) => handleClick(event)}>Trykk meg!</button>
+
       <h1 className="newh1">Test page</h1>
 
       <Velkommen navn="Therese" />
@@ -22,25 +38,12 @@ function App() {
         <p className="newP">Underelement 2</p>
         <p className="newP">Underelement 3</p>
       </NewComponent>
+
+      {cardInfo.map((element, index) => {
+        return <Card key={index} tittel={element.tittel} tekst={element.tekst} />;
+      })}
     </div>
   );
-}
-
-/**
- * COMPONENT WITH CHILDREN
- */
-
-function NewComponent(props) {
-  return <div>{props.children}</div>;
-}
-
-/**
- * COMPONENT WITH HTML ATTRIBUTES
- */
-
-function Velkommen(props) {
-  const { navn } = props;
-  return <h2 className={"border"}>Velkommen, {navn}</h2>;
 }
 
 export default App;
