@@ -8,6 +8,8 @@ import Velkommen from "./components/Velkommen";
 import NewComponent from "./components/NewComponent";
 
 function App() {
+  const [count, setCount] = useState(0);
+
   return (
     <div className="App">
       <Navbar>
@@ -24,7 +26,6 @@ function App() {
 
       <Title>
         <h1 className="h1Title">React Styling & Design</h1>
-        <h2 className="h2Title">av Christian R</h2>
       </Title>
 
       <Button onClick={(event) => handleClick(event)}>Trykk meg!</Button>

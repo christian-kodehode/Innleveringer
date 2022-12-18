@@ -40,14 +40,6 @@
   padding: var(--txt-m) 0;
 }
 
-.h1Title {
-  font-size: var(--txt-2xl);
-}
-
-.h2Title {
-  font-size: var(--txt-xl);
-}
-
 /*
 ** -----BUTTON-----
 */
